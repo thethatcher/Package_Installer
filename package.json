@@ -1,0 +1,26 @@
+{
+  "name": "package_installer",
+  "version": "1.0.0",
+  "description": "Code to sort packages input so that a package is installed after all dependancies have been installed.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thethatcher/Package_Installer.git"
+  },
+  "keywords": [
+    "Tech",
+    "Assessment"
+  ],
+  "author": "Ryan Thatcher",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thethatcher/Package_Installer/issues"
+  },
+  "homepage": "https://github.com/thethatcher/Package_Installer#readme",
+  "dependencies": {
+    "chai": "^4.1.2"
+  }
+}
