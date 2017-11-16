@@ -16,8 +16,10 @@ sortDependencies = {
 				rtnArray[i+1] = temp;
 			}
 		}
-		console.log(rtnArray);
 		return rtnArray;
+	},
+	sortOnPackage: (array) => {
+		return array.sort(comparePackages);
 	}
 }
 
@@ -28,10 +30,6 @@ function Package(string) {
 	const values = string.split(':');
 	this.package = values[0].trim();
 	this.dependancy = values[1].trim();
-}
-
-function findIndependantPackages(array) {
-	array.sort(comparePackages)
 }
 
 function comparePackages(a, b) {
