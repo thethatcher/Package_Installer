@@ -29,3 +29,13 @@ function Package(string) {
 	this.package = values[0].trim();
 	this.dependancy = values[1].trim();
 }
+
+function findIndependantPackages(array) {
+	array.sort(comparePackages)
+}
+
+function comparePackages(a, b) {
+	if (a.package < b.package ) {return -1}
+	if (a.package > b.package ) {return 1}
+	return 0;
+}
