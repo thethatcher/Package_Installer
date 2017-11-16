@@ -56,21 +56,19 @@ describe('Sort packageArray', ()=>{
 		});
 
 		it("Should add remaining packages to the sorted array in the appropriate order.", ()=> {
-			const input = {
-				unsorted: [
-					{package:"1", dependancy:"2"}
-					,{package:"2", dependancy:"3"}
-					,{package:"3", dependancy:"4"}
-				],
-				sorted: [{package:"4", dependancy:""}]
-			}
+			const input = [
+				{package:"1", dependancy:"2"}
+				,{package:"4", dependancy:""}
+				,{package:"3", dependancy:"4"}
+				,{package:"2", dependancy:"3"}
+			]
 			const expected = [
 				{package:"4", dependancy:""}
 				,{package:"3", dependancy:"4"}
 				,{package:"2", dependancy:"3"}
 				,{package:"1", dependancy:"2"}
 			];
-			const actual = sortDependencies.buildSortedArray(input.unsorted, input.sorted);
+			const actual = sortDependencies.buildSortedArray(input);
 		});
 		//another test will go here with the next subp=-process of the sort function.
 	});
