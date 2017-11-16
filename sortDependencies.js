@@ -20,6 +20,17 @@ sortDependencies = {
 	},
 	sortOnPackage: (array) => {
 		return array.sort(comparePackages);
+	},
+	findIndependantPackages: (array) => {
+		let alphaSortArray = array.sort(comparePackages);
+		const independantArray = [];
+		for (var i = 0; i < alphaSortArray.length; i++) {
+			if (alphaSortArray[i].dependancy == "") {
+				independantArray.push(alphaSortArray[i]);
+				alphaSortArray.splice(i,1);
+			} 
+		}
+		return independantArray;
 	}
 }
 
