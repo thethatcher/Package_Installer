@@ -24,6 +24,27 @@ describe('Sort packageArray', ()=>{
 		const actual = sortDependencies.sort(input);
 		const expected = [{dependant: "CamelCaser", dependancy: ""}, 
 			{dependant: "KittenService", dependancy: "CamelCaser" }]
-		expect(actual).to.eql(expected)
+		expect(actual).to.eql(expected);
 	});
+
+	it('Should sort the longer array into the correct order', ()=>{
+		const input = [
+			{dependant: "CamelCaser", dependancy: "KittenService"}
+			,{dependant: "KittenService", dependancy: ""}
+			,{dependant: "Leetmeme", dependancy: "Cyberportal"}
+			,{dependant: "Cyberportal", dependancy: "Ice"}
+			,{dependant: "Ice", dependancy: ""}
+			,{dependant: "Fraudstream", dependancy: "Leetmeme"}
+		]
+		const actual = sortDependencies.sort(input);
+		const expected = [
+			{dependant: "KittenService", dependancy: ""}
+			,{dependant: "Ice", dependancy: ""}
+			,{dependant: "Cyberportal", dependancy: "Ice"}
+			,{dependant: "Leetmeme", dependancy: "Cyberportal"}
+			,{dependant: "CamelCaser", dependancy: "KittenService"}
+			,{dependant: "Fraudstream", dependancy: "Leetmeme"}
+		]
+		expect(actual).to.eql(expected);
+	})
 });
