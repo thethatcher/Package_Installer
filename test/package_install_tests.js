@@ -36,7 +36,7 @@ describe('Sort packageArray', ()=>{
 			expect(actual).to.eql(expected);
 		});
 
-		it('find all the independant packages and return an array of them in alphabetical order', ()=>{
+		it('find all the independant packages and return an array with two elements, array[0] is the remaining packages, array[1] is the independant packages', ()=>{
 			const input = [
 				{package:"1", dependancy:"2"}
 				,{package:"4", dependancy:""}
@@ -44,7 +44,12 @@ describe('Sort packageArray', ()=>{
 				,{package:"2", dependancy:"3"}
 			];
 			const expected = [
-				{package:"4", dependancy:""}
+				[
+					{package:"1", dependancy:"2"}
+					,{package:"2", dependancy:"3"}
+					,{package:"3", dependancy:"4"}
+				],
+				[{package:"4", dependancy:""}]
 			];
 			const actual = sortDependencies.findIndependantPackages(input);
 			expect(actual).to.eql(expected);

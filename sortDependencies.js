@@ -30,7 +30,7 @@ sortDependencies = {
 				alphaSortArray.splice(i,1);
 			} 
 		}
-		return independantArray;
+		return [alphaSortArray, independantArray];
 	}
 }
 
