@@ -7,17 +7,6 @@ sortDependencies = {
 		}
 		return objArray;
 	},
-	sort: (array)=>{
-		let rtnArray = array;
-		for (var i = 0; i < rtnArray.length -1; i++) {
-			if(rtnArray[i].dependancy == rtnArray[i+1].package){
-				const temp = rtnArray[i];
-				rtnArray[i] = rtnArray[i+1];
-				rtnArray[i+1] = temp;
-			}
-		}
-		return rtnArray;
-	},
 	sortOnPackage: (array) => {
 		return array.sort(comparePackages);
 	},
@@ -26,12 +15,14 @@ sortDependencies = {
 		let alphaSortArray = sortDependencies.sortOnPackage(array); 
 		const independantArray = [];
 		//searches for any packages that do not have dependencies. These are the starting points for the sort. 
-		for (var i = 0; i < alphaSortArray.length; i++) {
+		for (var i = alphaSortArray.length -1; i >= 0 ; i--) {
+			console.log("checking dependancy: ",alphaSortArray[i]);
 			if (alphaSortArray[i].dependancy == "") {
 				independantArray.push(alphaSortArray[i]);
 				alphaSortArray.splice(i,1);
 			} 
 		}
+		console.log({unsorted: alphaSortArray, sorted: independantArray});
 		//returns both arrays, as they will both be needed for future reference. 
 		return {unsorted: alphaSortArray, sorted: independantArray};
 	},
@@ -49,18 +40,24 @@ sortDependencies = {
 				}
 			}
 		}
+		return sorted;
 	},
 	//this will take in the original array and use all of the above functions to compute the correct order and print it out. 
 	printPackagesInOrder: (array)=> {
 		let orderedList = "";
 		let workingArray = sortDependencies.makeObjects(array);
-		workingArray = sortDependencies.sort(workingArray);
+		//Sorts Alphabetically to ensure a consistent and predictable return value.
+		workingArray = sortDependencies.sortOnPackage(workingArray);
+		//sorts the array into the correct order.
 		workingArray = sortDependencies.buildSortedArray(workingArray);
+		//loops through the sorted array and builds the orderedList string.
 		for (var i = 0; i < workingArray.length; i++) {
 			orderedList += workingArray[i].package;
-			if(i < workingArray.length -2){orderedList += ", ";}
+			if(i <= workingArray.length -2){orderedList += ", ";}
 		}
+		return orderedList;
 	}
+
 
 }
 
@@ -74,7 +71,7 @@ function Package(string) {
 }
 
 function comparePackages(a, b) {
-	if (a.package < b.package ) {return -1}
-	if (a.package > b.package ) {return 1}
+	if (a.package > b.package ) {return -1}
+	if (a.package < b.package ) {return 1}
 	return 0;
 }

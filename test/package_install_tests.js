@@ -19,7 +19,7 @@ describe('Parse input', ()=>{
 
 describe('Sort packageArray', ()=>{
 	describe('Sorting steps', ()=>{
-		it('Should return an array sorted alphabetically by package name.', ()=>{
+		it('Should return an array sorted reverse alphabetically by package name.', ()=>{
 			const input = [
 				{package:"1", dependancy:"2"}
 				,{package:"4", dependancy:""}
@@ -27,10 +27,10 @@ describe('Sort packageArray', ()=>{
 				,{package:"2", dependancy:"3"}
 			];
 			const expected = [
-				{package:"1", dependancy:"2"}
-				,{package:"2", dependancy:"3"}
+				{package:"4", dependancy:""}
 				,{package:"3", dependancy:"4"}
-				,{package:"4", dependancy:""}
+				,{package:"2", dependancy:"3"}
+				,{package:"1", dependancy:"2"}
 			];
 			const actual = sortDependencies.sortOnPackage(input);
 			expect(actual).to.eql(expected);
@@ -45,9 +45,9 @@ describe('Sort packageArray', ()=>{
 			];
 			const expected = {
 				unsorted: [
-					{package:"1", dependancy:"2"}
+					{package:"3", dependancy:"4"}
 					,{package:"2", dependancy:"3"}
-					,{package:"3", dependancy:"4"}
+					,{package:"1", dependancy:"2"}
 				],
 				sorted: [{package:"4", dependancy:""}]
 			};
@@ -89,7 +89,7 @@ describe('Sort packageArray', ()=>{
 			"Ice: "
 		]
 		const actual = sortDependencies.printPackagesInOrder(input);
-		const expected = "KittenService, Ice, Cyberportal, Leetmeme, CamelCaser, Fraudstream"
+		const expected = "Ice, KittenService, Cyberportal, CamelCaser, Leetmeme, Fraudstream"
 		expect(actual).to.eql(expected);
 	})
 });
