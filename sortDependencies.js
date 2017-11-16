@@ -10,7 +10,7 @@ sortDependencies = {
 	sort: (array)=>{
 		let rtnArray = array;
 		for (var i = 0; i < rtnArray.length -1; i++) {
-			if(rtnArray[i].dependancy == rtnArray[i+1].dependant){
+			if(rtnArray[i].dependancy == rtnArray[i+1].package){
 				const temp = rtnArray[i];
 				rtnArray[i] = rtnArray[i+1];
 				rtnArray[i+1] = temp;
@@ -26,6 +26,6 @@ module.exports = sortDependencies
 
 function Package(string) {
 	const values = string.split(':');
-	this.dependant = values[0].trim();
+	this.package = values[0].trim();
 	this.dependancy = values[1].trim();
 }

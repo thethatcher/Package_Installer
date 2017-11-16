@@ -11,39 +11,60 @@ describe('Parse input', ()=>{
 	it('should parse the input to an array of objects', ()=>{
 		const input = [ "KittenService: CamelCaser", "CamelCaser: " ];
 		const actual = sortDependencies.makeObjects(input);
-		const expected = [{dependant: "KittenService", dependancy: "CamelCaser" }, 
-			{dependant: "CamelCaser", dependancy: ""}];
+		const expected = [{package: "KittenService", dependancy: "CamelCaser" }, 
+			{package: "CamelCaser", dependancy: ""}];
 		expect(actual).to.eql(expected);
 	});
 });
 
 describe('Sort packageArray', ()=>{
-	it('Should sort the packageArray into the correct order', ()=>{
-		const input = [{dependant: "KittenService", dependancy: "CamelCaser" }, 
-			{dependant: "CamelCaser", dependancy: ""}]
+	describe('sorting steps', ()=>{
+		it('find all the independant packages and return an array of them in alphabetical order', ()=>{
+			const input = [
+				{package:"1", dependancy:"2"}
+				,{package:"4", dependancy:"5"}
+				,{package:"3", dependancy:"4"}
+				,{package:"2", dependancy:"3"}
+			];
+			const expected = [
+				{package:"4", dependancy:"5"}
+				,{package:"3", dependancy:"4"}
+				,{package:"2", dependancy:"3"}
+				,{package:"1", dependancy:"2"}
+			];
+			const actual = sortDependencies.findIndependantPackages(input);
+			expect(actual).to.eql(expected);
+		});
+
+		//another test will go here with the next subp=-process of the sort function.
+	});
+
+	it('Should sort the short packageArray into the correct order', ()=>{
+		const input = [{package: "KittenService", dependancy: "CamelCaser" }, 
+			{package: "CamelCaser", dependancy: ""}]
 		const actual = sortDependencies.sort(input);
-		const expected = [{dependant: "CamelCaser", dependancy: ""}, 
-			{dependant: "KittenService", dependancy: "CamelCaser" }]
+		const expected = [{package: "CamelCaser", dependancy: ""}, 
+			{package: "KittenService", dependancy: "CamelCaser" }]
 		expect(actual).to.eql(expected);
 	});
 
 	it('Should sort the longer array into the correct order', ()=>{
 		const input = [
-			{dependant: "CamelCaser", dependancy: "KittenService"}
-			,{dependant: "KittenService", dependancy: ""}
-			,{dependant: "Leetmeme", dependancy: "Cyberportal"}
-			,{dependant: "Cyberportal", dependancy: "Ice"}
-			,{dependant: "Ice", dependancy: ""}
-			,{dependant: "Fraudstream", dependancy: "Leetmeme"}
+			{package: "CamelCaser", dependancy: "KittenService"}
+			,{package: "KittenService", dependancy: ""}
+			,{package: "Leetmeme", dependancy: "Cyberportal"}
+			,{package: "Cyberportal", dependancy: "Ice"}
+			,{package: "Ice", dependancy: ""}
+			,{package: "Fraudstream", dependancy: "Leetmeme"}
 		]
 		const actual = sortDependencies.sort(input);
 		const expected = [
-			{dependant: "KittenService", dependancy: ""}
-			,{dependant: "Ice", dependancy: ""}
-			,{dependant: "Cyberportal", dependancy: "Ice"}
-			,{dependant: "Leetmeme", dependancy: "Cyberportal"}
-			,{dependant: "CamelCaser", dependancy: "KittenService"}
-			,{dependant: "Fraudstream", dependancy: "Leetmeme"}
+			{package: "KittenService", dependancy: ""}
+			,{package: "Ice", dependancy: ""}
+			,{package: "Cyberportal", dependancy: "Ice"}
+			,{package: "Leetmeme", dependancy: "Cyberportal"}
+			,{package: "CamelCaser", dependancy: "KittenService"}
+			,{package: "Fraudstream", dependancy: "Leetmeme"}
 		]
 		expect(actual).to.eql(expected);
 	})
