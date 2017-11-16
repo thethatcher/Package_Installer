@@ -14,5 +14,14 @@ describe('Parse input', ()=>{
 		const expected = [{dependant: "KittenService", dependancy: "CamelCaser" }, 
 			{dependant: "CamelCaser", dependancy: ""}];
 		expect(actual).to.eql(expected);
-	})
-})
+	});
+});
+
+describe('Sort packageArray', ()=>{
+	it('Should sort the packageArray into the correct order', ()=>{
+		const actual = sortDependencies.sort(input);
+		const expected = [{dependant: "CamelCaser", dependancy: ""}, 
+			{dependant: "KittenService", dependancy: "CamelCaser" }]
+		expect(actual).to.eql(expected)
+	});
+});
