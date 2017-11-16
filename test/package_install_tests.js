@@ -19,6 +19,8 @@ describe('Parse input', ()=>{
 
 describe('Sort packageArray', ()=>{
 	it('Should sort the packageArray into the correct order', ()=>{
+		const input = [{dependant: "KittenService", dependancy: "CamelCaser" }, 
+			{dependant: "CamelCaser", dependancy: ""}]
 		const actual = sortDependencies.sort(input);
 		const expected = [{dependant: "CamelCaser", dependancy: ""}, 
 			{dependant: "KittenService", dependancy: "CamelCaser" }]
