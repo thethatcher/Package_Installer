@@ -22,16 +22,32 @@ sortDependencies = {
 		return array.sort(comparePackages);
 	},
 	findIndependantPackages: (array) => {
-		let alphaSortArray = array.sort(comparePackages);
+		//sort the array alphoabetically based on array[i].package value. This ensures consistent output order. 
+		let alphaSortArray = array.sort(comparePackages); 
 		const independantArray = [];
+		//searches for any packages that do not have dependencies. These are the starting points for the sort. 
 		for (var i = 0; i < alphaSortArray.length; i++) {
 			if (alphaSortArray[i].dependancy == "") {
 				independantArray.push(alphaSortArray[i]);
 				alphaSortArray.splice(i,1);
 			} 
 		}
-		return [alphaSortArray, independantArray];
+		//returns both arrays, as they will both be needed for future reference. 
+		return {unsorted: alphaSortArray, sorted: independantArray};
+	},
+	buildSortedArray: (unsorted, sorted) => {
+		//for each element in the sorted array (as it grows) check for any packages that depend on sorted[i].package.
+		for (var i = 0; i < sorted.length; i++) {
+			for (var j = 0; j < unsorted.length; j++) {
+				//loop through the unsorted array searching for any packages that depend on sorted[i].package and add them to the sorted array.
+				if(sorted[i].package == unsorted[j].dependancy) {
+					sorted.push(unsorted[j]); // add the matched package to the sorted array.
+					unsorted.splice(j,1); //remove the matched package from the unsorted array
+				}
+			}
+		}
 	}
+
 }
 
 module.exports = sortDependencies

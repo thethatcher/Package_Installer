@@ -36,39 +36,41 @@ describe('Sort packageArray', ()=>{
 			expect(actual).to.eql(expected);
 		});
 
-		it('Should find all the independant packages and return an array with two elements, array[0] is the remaining packages, array[1] is the independant packages', ()=>{
+		it('Should find all the independant packages and return an object with two arrays, sorted and unsorted.', ()=>{
 			const input = [
 				{package:"1", dependancy:"2"}
 				,{package:"4", dependancy:""}
 				,{package:"3", dependancy:"4"}
 				,{package:"2", dependancy:"3"}
 			];
-			const expected = [
-				[
+			const expected = {
+				unsorted: [
 					{package:"1", dependancy:"2"}
 					,{package:"2", dependancy:"3"}
 					,{package:"3", dependancy:"4"}
 				],
-				[{package:"4", dependancy:""}]
-			];
+				sorted: [{package:"4", dependancy:""}]
+			};
 			const actual = sortDependencies.findIndependantPackages(input);
 			expect(actual).to.eql(expected);
 		});
 
 		it("Should add remaining packages to the sorted array in the appropriate order.", ()=> {
-			const input = [
-				{package:"1", dependancy:"2"}
-				,{package:"4", dependancy:""}
-				,{package:"3", dependancy:"4"}
-				,{package:"2", dependancy:"3"}
-			];
+			const input = {
+				unsorted: [
+					{package:"1", dependancy:"2"}
+					,{package:"2", dependancy:"3"}
+					,{package:"3", dependancy:"4"}
+				],
+				sorted: [{package:"4", dependancy:""}]
+			}
 			const expected = [
 				{package:"4", dependancy:""}
 				,{package:"3", dependancy:"4"}
 				,{package:"2", dependancy:"3"}
 				,{package:"1", dependancy:"2"}
 			];
-			const actual = sortDependencies.buildSortedArray(input);
+			const actual = sortDependencies.buildSortedArray(input.unsorted, input.sorted);
 		});
 		//another test will go here with the next subp=-process of the sort function.
 	});
