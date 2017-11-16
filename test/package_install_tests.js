@@ -70,36 +70,26 @@ describe('Sort packageArray', ()=>{
 			];
 			const actual = sortDependencies.buildSortedArray(input);
 		});
-		//another test will go here with the next subp=-process of the sort function.
 	});
 
-// 	it('Should sort the short packageArray into the correct order', ()=>{
-// 		const input = [{package: "KittenService", dependancy: "CamelCaser" }, 
-// 			{package: "CamelCaser", dependancy: ""}]
-// 		const actual = sortDependencies.sort(input);
-// 		const expected = [{package: "CamelCaser", dependancy: ""}, 
-// 			{package: "KittenService", dependancy: "CamelCaser" }]
-// 		expect(actual).to.eql(expected);
-// 	});
+	it('Should sort the short packageArray into the correct order', ()=>{
+		const input = ["KittenService: CamelCaser", "CamelCaser: "]
+		const actual = sortDependencies.printPackagesInOrder(input);
+		const expected = "CamelCaser, KittenService"
+		expect(actual).to.eql(expected);
+	});
 
-// 	it('Should sort the longer array into the correct order', ()=>{
-// 		const input = [
-// 			{package: "CamelCaser", dependancy: "KittenService"}
-// 			,{package: "KittenService", dependancy: ""}
-// 			,{package: "Leetmeme", dependancy: "Cyberportal"}
-// 			,{package: "Cyberportal", dependancy: "Ice"}
-// 			,{package: "Ice", dependancy: ""}
-// 			,{package: "Fraudstream", dependancy: "Leetmeme"}
-// 		]
-// 		const actual = sortDependencies.sort(input);
-// 		const expected = [
-// 			{package: "KittenService", dependancy: ""}
-// 			,{package: "Ice", dependancy: ""}
-// 			,{package: "Cyberportal", dependancy: "Ice"}
-// 			,{package: "Leetmeme", dependancy: "Cyberportal"}
-// 			,{package: "CamelCaser", dependancy: "KittenService"}
-// 			,{package: "Fraudstream", dependancy: "Leetmeme"}
-// 		]
-// 		expect(actual).to.eql(expected);
-// 	})
+	it('Should sort the longer array into the correct order', ()=>{
+		const input = [
+			"KittenService: ",
+			"Leetmeme: Cyberportal",
+			"Cyberportal: Ice",
+			"CamelCaser: KittenService",
+			"Fraudstream: Leetmeme",
+			"Ice: "
+		]
+		const actual = sortDependencies.printPackagesInOrder(input);
+		const expected = "KittenService, Ice, Cyberportal, Leetmeme, CamelCaser, Fraudstream"
+		expect(actual).to.eql(expected);
+	})
 });

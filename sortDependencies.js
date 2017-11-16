@@ -49,6 +49,17 @@ sortDependencies = {
 				}
 			}
 		}
+	},
+	//this will take in the original array and use all of the above functions to compute the correct order and print it out. 
+	printPackagesInOrder: (array)=> {
+		let orderedList = "";
+		let workingArray = sortDependencies.makeObjects(array);
+		workingArray = sortDependencies.sort(workingArray);
+		workingArray = sortDependencies.buildSortedArray(workingArray);
+		for (var i = 0; i < workingArray.length; i++) {
+			orderedList += workingArray[i].package;
+			if(i < workingArray.length -2){orderedList += ", ";}
+		}
 	}
 
 }
