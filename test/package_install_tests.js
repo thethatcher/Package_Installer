@@ -91,5 +91,20 @@ describe('Sort packageArray', ()=>{
 		const actual = sortDependencies.printPackagesInOrder(input);
 		const expected = "Ice, KittenService, Cyberportal, CamelCaser, Leetmeme, Fraudstream"
 		expect(actual).to.eql(expected);
+	});
+
+	it('Should sort this long array into correct order', ()=>{
+		const input = [
+			"a: ",
+			"b: a",
+			"c: b",
+			"d: b",
+			"f: d",
+			"e: d",
+			"g: f"
+		];
+		const expected = "a, b, c, d, e, f, g";
+		const actual = sortDependencies.printPackagesInOrder(input);
+		expect(actual).to.eql(expected);
 	})
 });

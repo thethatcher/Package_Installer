@@ -16,13 +16,11 @@ sortDependencies = {
 		const independantArray = [];
 		//searches for any packages that do not have dependencies. These are the starting points for the sort. 
 		for (var i = alphaSortArray.length -1; i >= 0 ; i--) {
-			console.log("checking dependancy: ",alphaSortArray[i]);
 			if (alphaSortArray[i].dependancy == "") {
 				independantArray.push(alphaSortArray[i]);
 				alphaSortArray.splice(i,1);
 			} 
 		}
-		console.log({unsorted: alphaSortArray, sorted: independantArray});
 		//returns both arrays, as they will both be needed for future reference. 
 		return {unsorted: alphaSortArray, sorted: independantArray};
 	},
@@ -32,7 +30,8 @@ sortDependencies = {
 		const unsorted = temp.unsorted;
 		//for each element in the sorted array (as it grows) check for any packages that depend on sorted[i].package.
 		for (var i = 0; i < sorted.length; i++) {
-			for (var j = 0; j < unsorted.length; j++) {
+			//have to use a decrementing for loop as we are removing elements of the array as we go. 
+			for (var j = unsorted.length - 1; j >= 0; j--) {
 				//loop through the unsorted array searching for any packages that depend on sorted[i].package and add them to the sorted array.
 				if(sorted[i].package == unsorted[j].dependancy) {
 					sorted.push(unsorted[j]); // add the matched package to the sorted array.
