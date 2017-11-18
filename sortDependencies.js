@@ -4,6 +4,10 @@ sortDependencies = {
 	makeObjects: (array) =>{
 		const objArray = [];
 		for (var i = 0; i < array.length; i++) {
+			if(!checkFormat(array[i])) {
+					console.log("'" + array[i] + "' does not match the regex.")		
+					throw new Error("Invalid Input: Incorrect format.");
+				}
 			objArray.push(new Package(array[i]));
 		}
 		return objArray;
@@ -83,4 +87,8 @@ function comparePackages(a, b) {
 	if (a.package.toUpperCase() > b.package.toUpperCase() ) {return -1}
 	if (a.package.toUpperCase() < b.package.toUpperCase() ) {return 1}
 	return 0;
+}
+
+function checkFormat(string){
+	return /^[A-Za-z0-9]+: [A-Za-z0-9]*$/.test(string);
 }

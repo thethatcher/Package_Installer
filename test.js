@@ -1,5 +1,5 @@
 var sortDependencies = require("./sortDependencies.js");
 
-const input = ["Mallory: Ryan", "Ryan: Mallory", "Stephanie: Kristine", "Kristine: "];
+const input = ["Ryan: Mallory", "Mallory: "];
 
 console.log(sortDependencies.printPackagesInOrder(input));
