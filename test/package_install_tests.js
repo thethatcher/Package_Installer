@@ -127,6 +127,12 @@ describe('Sort packageArray', ()=>{
 			const input = ["Mallory: Ryan", "Ryan: Mallory"];
 			expect(function(){sortDependencies.printPackagesInOrder(input)}).to.throw("Invalid Input");
 		});
+
+		it("Should reject the simple cycle input, that also contains a simple valid chain.", ()=> {
+			const input = ["Mallory: Ryan", "Ryan: Mallory", "Stephanie: Kristine", "Kristine: "];
+			expect(function(){sortDependencies.printPackagesInOrder(input)}).to.throw("Invalid Input");
+		});
+
 	});
 
 	describe("Complex input sorting tests", ()=> {
