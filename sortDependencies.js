@@ -24,6 +24,7 @@ sortDependencies = {
 				alphaSortArray.splice(i,1);
 			} 
 		}
+		if(independantArray.length < 1){throw new Error("Invalid Input");}
 		//returns both arrays, as they will both be needed for future reference. 
 		return {unsorted: alphaSortArray, sorted: independantArray};
 	},
