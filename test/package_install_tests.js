@@ -123,8 +123,11 @@ describe('Sort packageArray', ()=>{
 	});
 
 	describe("Invalid input tests", ()=> {
-		
+		it("Should reject the simple cycle input", ()=> {
+			const input = ["Mallory: Ryan", "Ryan: Mallory"];
+			expect(function(){sortDependencies.printPackagesInOrder(input)}).to.throw("Invalid Input");
 		});
+	});
 
 	describe("Complex input sorting tests", ()=> {
 		it("Should sort the single 6 branch chain.", ()=> {
