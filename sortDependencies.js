@@ -1,5 +1,6 @@
 
 sortDependencies = {
+	//parses the input into an array of Package objects that are more friendly 
 	makeObjects: (array) =>{
 		const objArray = [];
 		for (var i = 0; i < array.length; i++) {
@@ -7,9 +8,11 @@ sortDependencies = {
 		}
 		return objArray;
 	},
+	//used to test the sort comparison. 
 	sortOnPackage: (array) => {
 		return array.sort(comparePackages);
 	},
+
 	findIndependantPackages: (array) => {
 		//sort the array alphabetically based on array[i].package value. This ensures consistent output order. 
 		let alphaSortArray = sortDependencies.sortOnPackage(array); 
@@ -24,6 +27,7 @@ sortDependencies = {
 		//returns both arrays, as they will both be needed for future reference. 
 		return {unsorted: alphaSortArray, sorted: independantArray};
 	},
+
 	buildSortedArray: (array) => {
 		const temp = sortDependencies.findIndependantPackages(array);
 		const sorted = temp.sorted;
@@ -62,13 +66,15 @@ sortDependencies = {
 
 module.exports = sortDependencies
 
-
+//constructor used to make Package objects. 
 function Package(string) {
 	const values = string.split(':');
 	this.package = values[0].trim();
 	this.dependancy = values[1].trim();
 }
 
+//compare function used to sort package objects on their package attribute in revers alphabetical order. 
+//case insensitive. 
 function comparePackages(a, b) {
 	if (a.package.toUpperCase() > b.package.toUpperCase() ) {return -1}
 	if (a.package.toUpperCase() < b.package.toUpperCase() ) {return 1}
