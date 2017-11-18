@@ -133,6 +133,15 @@ describe('Sort packageArray', ()=>{
 			expect(function(){sortDependencies.printPackagesInOrder(input)}).to.throw("Invalid Input");
 		});
 
+		it("Should throw an invalid input error when given input of invalid format", ()=> {
+			const input = ["This is not valid input."];
+			expect(function(){sortDependencies.printPackagesInOrder(input)}).to.throw("Invalid Input");
+		});
+
+		it("Should throw an invalid input error when given no input.", ()=> {
+			expect(function(){sortDependencies.printPackagesInOrder([])}).to.throw("Invalid Input");
+		});
+
 	});
 
 	describe("Complex input sorting tests", ()=> {
