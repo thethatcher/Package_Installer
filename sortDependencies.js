@@ -70,7 +70,7 @@ function Package(string) {
 }
 
 function comparePackages(a, b) {
-	if (a.package > b.package ) {return -1}
-	if (a.package < b.package ) {return 1}
+	if (a.package.toUpperCase() > b.package.toUpperCase() ) {return -1}
+	if (a.package.toUpperCase() < b.package.toUpperCase() ) {return 1}
 	return 0;
 }

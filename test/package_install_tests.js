@@ -72,39 +72,48 @@ describe('Sort packageArray', ()=>{
 		});
 	});
 
-	it('Should sort the short packageArray into the correct order', ()=>{
-		const input = ["KittenService: CamelCaser", "CamelCaser: "]
-		const actual = sortDependencies.printPackagesInOrder(input);
-		const expected = "CamelCaser, KittenService"
-		expect(actual).to.eql(expected);
-	});
+	describe("Basic Sorting tests", () => {		
+		it("Should sort the array of no dependancy packages alphabetically.", () => {
+			const input = ["Node: ", "mysql: ", "Yarn: ", "Harvey: ", "Steven: ", "Cynthia: "];
+			const expected = "Cynthia, Harvey, mysql, Node, Steven, Yarn";
+			const actual = sortDependencies.printPackagesInOrder(input);
+			expect(actual).to.eql(expected);
+		});
 
-	it('Should sort the longer array into the correct order', ()=>{
-		const input = [
-			"KittenService: ",
-			"Leetmeme: Cyberportal",
-			"Cyberportal: Ice",
-			"CamelCaser: KittenService",
-			"Fraudstream: Leetmeme",
-			"Ice: "
-		]
-		const actual = sortDependencies.printPackagesInOrder(input);
-		const expected = "Ice, KittenService, Cyberportal, CamelCaser, Leetmeme, Fraudstream"
-		expect(actual).to.eql(expected);
-	});
+		it('Should sort the short packageArray into the correct order', ()=>{
+			const input = ["KittenService: CamelCaser", "CamelCaser: "]
+			const actual = sortDependencies.printPackagesInOrder(input);
+			const expected = "CamelCaser, KittenService"
+			expect(actual).to.eql(expected);
+		});
 
-	it('Should sort this long array into correct order', ()=>{
-		const input = [
-			"a: ",
-			"b: a",
-			"c: b",
-			"d: b",
-			"f: d",
-			"e: d",
-			"g: f"
-		];
-		const expected = "a, b, c, d, e, f, g";
-		const actual = sortDependencies.printPackagesInOrder(input);
-		expect(actual).to.eql(expected);
-	})
+		it('Should sort the simple branched chain', ()=>{
+			const input = [
+				"KittenService: ",
+				"Leetmeme: Cyberportal",
+				"Cyberportal: Ice",
+				"CamelCaser: KittenService",
+				"Fraudstream: Leetmeme",
+				"Ice: "
+			]
+			const actual = sortDependencies.printPackagesInOrder(input);
+			const expected = "Ice, KittenService, Cyberportal, CamelCaser, Leetmeme, Fraudstream"
+			expect(actual).to.eql(expected);
+		});
+
+		it('Should sort this branched chain.', ()=>{
+			const input = [
+				"a: ",
+				"b: a",
+				"c: b",
+				"d: b",
+				"f: d",
+				"e: d",
+				"g: f"
+			];
+			const expected = "a, b, c, d, e, f, g";
+			const actual = sortDependencies.printPackagesInOrder(input);
+			expect(actual).to.eql(expected);
+		});
+	});
 });
