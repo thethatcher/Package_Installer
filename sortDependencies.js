@@ -24,6 +24,7 @@ sortDependencies = {
 				alphaSortArray.splice(i,1);
 			} 
 		}
+		//if the independantArray is empty, it means that every package has a dependancy, or the input was empty. both are invalid. 
 		if(independantArray.length < 1){throw new Error("Invalid Input");}
 		//returns both arrays, as they will both be needed for future reference. 
 		return {unsorted: alphaSortArray, sorted: independantArray};
@@ -44,6 +45,7 @@ sortDependencies = {
 				}
 			}
 		}
+		if(unsorted.length > 0){throw new Error("Invalid Input");}
 		return sorted;
 	},
 	//this will take in the original array and use all of the above functions to compute the correct order and print it out. 
