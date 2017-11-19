@@ -12,23 +12,23 @@ describe('Sort packageArray', ()=>{
 		it('should parse the input to an array of objects', ()=>{
 			const input = [ "KittenService: CamelCaser", "CamelCaser: " ];
 			const actual = sortDependencies.makeObjects(input);
-			const expected = [{package: "KittenService", dependancy: "CamelCaser" }, 
-				{package: "CamelCaser", dependancy: ""}];
+			const expected = [{package: "KittenService", dependency: "CamelCaser" }, 
+				{package: "CamelCaser", dependency: ""}];
 			expect(actual).to.eql(expected);
 		});
 
 		it('Should return an array sorted reverse alphabetically by package name.', ()=>{
 			const input = [
-				{package:"1", dependancy:"2"}
-				,{package:"4", dependancy:""}
-				,{package:"3", dependancy:"4"}
-				,{package:"2", dependancy:"3"}
+				{package:"1", dependency:"2"}
+				,{package:"4", dependency:""}
+				,{package:"3", dependency:"4"}
+				,{package:"2", dependency:"3"}
 			];
 			const expected = [
-				{package:"4", dependancy:""}
-				,{package:"3", dependancy:"4"}
-				,{package:"2", dependancy:"3"}
-				,{package:"1", dependancy:"2"}
+				{package:"4", dependency:""}
+				,{package:"3", dependency:"4"}
+				,{package:"2", dependency:"3"}
+				,{package:"1", dependency:"2"}
 			];
 			const actual = sortDependencies.sortOnPackage(input);
 			expect(actual).to.eql(expected);
@@ -36,18 +36,18 @@ describe('Sort packageArray', ()=>{
 
 		it('Should find all the independant packages and return an object with two arrays, sorted and unsorted.', ()=>{
 			const input = [
-				{package:"1", dependancy:"2"}
-				,{package:"4", dependancy:""}
-				,{package:"3", dependancy:"4"}
-				,{package:"2", dependancy:"3"}
+				{package:"1", dependency:"2"}
+				,{package:"4", dependency:""}
+				,{package:"3", dependency:"4"}
+				,{package:"2", dependency:"3"}
 			];
 			const expected = {
 				unsorted: [
-					{package:"3", dependancy:"4"}
-					,{package:"2", dependancy:"3"}
-					,{package:"1", dependancy:"2"}
+					{package:"3", dependency:"4"}
+					,{package:"2", dependency:"3"}
+					,{package:"1", dependency:"2"}
 				],
-				sorted: [{package:"4", dependancy:""}]
+				sorted: [{package:"4", dependency:""}]
 			};
 			const actual = sortDependencies.findIndependantPackages(input);
 			expect(actual).to.eql(expected);
@@ -55,23 +55,23 @@ describe('Sort packageArray', ()=>{
 
 		it("Should add remaining packages to the sorted array in the appropriate order.", ()=> {
 			const input = [
-				{package:"1", dependancy:"2"}
-				,{package:"4", dependancy:""}
-				,{package:"3", dependancy:"4"}
-				,{package:"2", dependancy:"3"}
+				{package:"1", dependency:"2"}
+				,{package:"4", dependency:""}
+				,{package:"3", dependency:"4"}
+				,{package:"2", dependency:"3"}
 			]
 			const expected = [
-				{package:"4", dependancy:""}
-				,{package:"3", dependancy:"4"}
-				,{package:"2", dependancy:"3"}
-				,{package:"1", dependancy:"2"}
+				{package:"4", dependency:""}
+				,{package:"3", dependency:"4"}
+				,{package:"2", dependency:"3"}
+				,{package:"1", dependency:"2"}
 			];
 			const actual = sortDependencies.buildSortedArray(input);
 		});
 	});
 
 	describe("Basic input sorting tests", () => {		
-		it("Should sort the array of no dependancy packages alphabetically.", () => {
+		it("Should sort the array of no dependency packages alphabetically.", () => {
 			const input = ["Node: ", "mysql: ", "Yarn: ", "Harvey: ", "Steven: ", "Cynthia: "];
 			const expected = "Cynthia, Harvey, mysql, Node, Steven, Yarn";
 			const actual = sortDependencies.printPackagesInOrder(input);
@@ -140,6 +140,16 @@ describe('Sort packageArray', ()=>{
 
 		it("Should throw an invalid input error when given no input.", ()=> {
 			expect(function(){sortDependencies.printPackagesInOrder([])}).to.throw("Invalid Input");
+		});
+
+		it("Should throw an invalid input error when given an array with one invalid element", ()=> {
+			const input = ["Ryan: Mallory", "Mallory: ", " : "];
+			expect(function(){sortDependencies.printPackagesInOrder(input)}).to.throw("Invalid Input");
+		});
+
+		it("Should throw an invalid input error when given input that is not an array", ()=> {
+			const input = "This is not an array.";
+			expect(function(){sortDependencies.printPackagesInOrder(input)}).to.throw("Invalid Input");
 		});
 
 	});
